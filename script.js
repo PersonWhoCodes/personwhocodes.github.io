@@ -7,7 +7,8 @@ if (!code) {
 } else {
     const accessToken = await getAccessToken(clientId, code);
     const profile = await fetchProfile(accessToken);
-    populateUI(profile);
+    const state = await fetchState(accessToken);
+    populateUI(profile, state);
 }
 
 export async function redirectToAuthCodeFlow(clientId) {
@@ -75,7 +76,15 @@ async function fetchProfile(token) {
     return await result.json();
 }
 
-function populateUI(profile) {
+async function fetchState(token){
+    const result = await fetch("https://api.spotify.com/v1/me/player", {
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
+    });
+
+    return await result.json();
+}
+
+function populateUI(profile, state) {
     document.getElementById("displayName").innerText = profile.display_name;
     if (profile.images[0]) {
         const profileImage = new Image(200, 200);
@@ -89,5 +98,6 @@ function populateUI(profile) {
     document.getElementById("uri").setAttribute("href", profile.external_urls.spotify);
     document.getElementById("url").innerText = profile.href;
     document.getElementById("url").setAttribute("href", profile.href);
-}
 
+    document.getElementById("help").innerText = state.repeat_state;
+}
