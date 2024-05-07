@@ -75,7 +75,7 @@ async function fetchProfile(token) {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
-    return await result.json();
+    return await result;
 }
 
 async function fetchState(token){
