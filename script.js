@@ -9,6 +9,8 @@ if (!code) {
     const profile = await fetchProfile(accessToken);
     const state = await fetchState(accessToken);
     populateUI(profile, state);
+
+    console.log(state.timestamp);
 }
 
 export async function redirectToAuthCodeFlow(clientId) {
