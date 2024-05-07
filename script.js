@@ -6,8 +6,8 @@ if (!code) {
     redirectToAuthCodeFlow(clientId);
 } else {
     const accessToken = await getAccessToken(clientId, code);
-    const profile = await fetchProfile(accessToken);
     const state = await fetchState(accessToken);
+    const profile = await fetchProfile(accessToken);
     populateUI(profile, state);
 
     console.log(state);
@@ -79,11 +79,11 @@ async function fetchProfile(token) {
 }
 
 async function fetchState(token){
-    const result = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+    const res = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
-    return await result.json();
+    return await res.json();
 }
 
 function populateUI(profile, state) {
