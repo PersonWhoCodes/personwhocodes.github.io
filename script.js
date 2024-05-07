@@ -77,7 +77,7 @@ async function fetchProfile(token) {
 }
 
 async function fetchState(token){
-    const result = await fetch("https://api.spotify.com/v1/me/player", {
+    const result = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
@@ -99,5 +99,5 @@ function populateUI(profile, state) {
     document.getElementById("url").innerText = profile.href;
     document.getElementById("url").setAttribute("href", profile.href);
 
-    document.getElementById("help").innerText = state.repeat_state;
+    document.getElementById("help").innerText = state.timestamp;
 }
