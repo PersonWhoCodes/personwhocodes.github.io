@@ -10,7 +10,6 @@ if (!code) {
     const state = await fetchState(accessToken);
     populateUI(profile, state);
 
-    console.log(profile);
     console.log(state);
 }
 
@@ -24,7 +23,7 @@ export async function redirectToAuthCodeFlow(clientId) {
     params.append("client_id", clientId);
     params.append("response_type", "code");
     params.append("redirect_uri", "http://personwhocodes.github.io");
-    params.append("scope", "user-read-private user-read-email");
+    params.append("scope", "user-read-private user-read-email user-read-currently-playing");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
 
