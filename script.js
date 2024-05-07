@@ -79,11 +79,11 @@ async function fetchProfile(token) {
 }
 
 async function fetchState(token){
-    const res = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+    const result = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
-    return await res.json();
+    return await result;
 }
 
 function populateUI(profile, state) {
