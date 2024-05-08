@@ -10,7 +10,7 @@ if (!code) {
     const state = await fetchState(accessToken);
     populateUI(profile, state);
 
-    consolee.log(profile);
+    console.log(profile);
     console.log(state);
 }
 
