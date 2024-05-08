@@ -10,7 +10,7 @@ if (!code) {
     const state = await fetchState(accessToken);
     populateUI(profile, state);
 
-    document.getElementById("next").onclick = function() {next(acessToken)};
+    document.getElementById("next").onclick = function() {next(accessToken)};
 
     console.log(profile);
     console.log(state);
