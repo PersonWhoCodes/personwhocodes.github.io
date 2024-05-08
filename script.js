@@ -8,6 +8,7 @@ if (!code) {
     const accessToken = await getAccessToken(clientId, code);
     const state = await fetchState(accessToken);
     const profile = await fetchProfile(accessToken);
+    populateUI(profile, state);
 
     console.log(profile);
     console.log(state);
