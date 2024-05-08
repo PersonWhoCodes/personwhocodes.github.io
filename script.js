@@ -10,6 +10,8 @@ if (!code) {
     const state = await fetchState(accessToken);
     populateUI(profile, state);
 
+    document.getElementById("next").onclick = next(accessToken);
+
     console.log(profile);
     console.log(state);
 }
@@ -24,7 +26,7 @@ export async function redirectToAuthCodeFlow(clientId) {
     params.append("client_id", clientId);
     params.append("response_type", "code");
     params.append("redirect_uri", "http://personwhocodes.github.io");
-    params.append("scope", "user-read-private user-read-email user-read-currently-playing");
+    params.append("scope", "user-read-private user-read-email user-read-currently-playing user-modify-playback-state");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
 
@@ -91,6 +93,14 @@ async function fetchState(token){
     }
 }
 
+async function next(token) {
+    const result = await fetch("https://api.spotify.com/v1/me/player/next", {
+        method: "POST", headers: { Authorization: `Bearer ${token}` }
+    })
+
+    console.log(result);
+}
+
 function populateUI(profile, state) {
     document.getElementById("displayName").innerText = profile.display_name;
     if (profile.images[0]) {
@@ -112,3 +122,5 @@ function populateUI(profile, state) {
         document.getElementById("help").innerText = "Not currently playing anything";
     }
 }
+
+
