@@ -9,6 +9,7 @@ if (!code) {
     const state = await fetchState(accessToken);
     const profile = await fetchProfile(accessToken);
 
+    console.log(profile);
     console.log(state);
 }
 
