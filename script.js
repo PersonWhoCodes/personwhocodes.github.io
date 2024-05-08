@@ -6,11 +6,11 @@ if (!code) {
     redirectToAuthCodeFlow(clientId);
 } else {
     const accessToken = await getAccessToken(clientId, code);
-    const state = await fetchState(accessToken);
     const profile = await fetchProfile(accessToken);
+    const state = await fetchState(accessToken);
     populateUI(profile, state);
 
-    console.log(profile);
+    consolee.log(profile);
     console.log(state);
 }
 
@@ -84,7 +84,11 @@ async function fetchState(token){
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
-    return await result.json();
+    try{
+        return await result.json();
+    } catch(err){
+        return 0;
+    }
 }
 
 function populateUI(profile, state) {
@@ -102,5 +106,9 @@ function populateUI(profile, state) {
     document.getElementById("url").innerText = profile.href;
     document.getElementById("url").setAttribute("href", profile.href);
 
-    document.getElementById("help").innerText = state.timestamp;
+    if(state!=0){
+        document.getElementById("help").innerText = state.timestamp;
+    } else {
+        document.getElementById("help").innerText = "Not currently playing anything";
+    }
 }
