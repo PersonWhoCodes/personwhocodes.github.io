@@ -107,7 +107,7 @@ function populateUI(profile, state) {
     document.getElementById("url").setAttribute("href", profile.href);
 
     if(state!=0){
-        document.getElementById("help").innerText = state.timestamp;
+        document.getElementById("help").innerText = state.item.name;
     } else {
         document.getElementById("help").innerText = "Not currently playing anything";
     }
