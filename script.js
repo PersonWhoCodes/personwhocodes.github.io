@@ -6,9 +6,11 @@ let isPaused = false;
 
 if (!code) {
     redirectToAuthCodeFlow(clientId);
+    console.log("Redirect 1")
 } else {
     if(!code1){
         localStorage.setItem("code", code);
+        console.log("Redirect 2");
         redirectToAuthCodeFlow(clientId);
     } else {
     const accessToken = await getAccessToken(clientId, code);
@@ -111,13 +113,6 @@ async function next(token) {
     console.log(result);
 }
 
-async function togglePlay(token){
-    if(isPaused){
-        play(token);
-    } else {
-        pause(token);
-    }
-}
 async function play(token){
     const result = await fetch("https://api.spotify.com/v1/me/player/play", {
         method: "PUT", headers: { Authorization: `Bearer ${token}` },
