@@ -104,10 +104,10 @@ async function next(token) {
 
 async function play(token){
     const result = await fetch("https://api.spotify.com/v1/me/player/play", {
-        method: "PUT", headers: { Authorization: `Bearer ${token}` },
+        method: "PUT",
         headers: { 
             Authorization: `Bearer ${token}`,
-            'Content-Type': `application/json`
+            'Content-Type': "application/json"
         },
         data: {"position_ms" : 0}
 
