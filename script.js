@@ -1,6 +1,7 @@
 const clientId = "45818a98ef3049c091f00a77ad4cf5ee"; // Replace with your client ID
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
+let isPaused = true;
 
 if (!code) {
     redirectToAuthCodeFlow(clientId);
@@ -11,7 +12,7 @@ if (!code) {
     populateUI(profile, state);
 
     document.getElementById("next").onclick = function() {next(accessToken)};
-    document.getElementById("play").onclick = function() {play(accessToken)};
+    document.getElementById("play").onclick = function() {togglePlay(accessToken)};
 
     console.log(profile);
     console.log(state);
@@ -116,6 +117,22 @@ async function play(token){
     console.log(result);
 }
 
+async function pause(token){
+    const result = await fetch("https://api.spotify.com/v1/me/player/pause", {
+        method: "PUT", headers: { Authorization: `Bearer ${token}` }
+    })
+
+    console.log(result);
+}
+
+async function togglePlay(token){
+    if(isPaused){
+        play(token);
+    } else {
+        pause(token);
+    }
+}
+
 function populateUI(profile, state) {
     document.getElementById("displayName").innerText = profile.display_name;
     if (profile.images[0]) {
@@ -133,8 +150,10 @@ function populateUI(profile, state) {
 
     if(state!=0){
         document.getElementById("help").innerText = state.item.name;
+        isPaused = false;
     } else {
         document.getElementById("help").innerText = "Not currently playing anything";
+        isPaused = true;
     }
 }
 
