@@ -11,6 +11,7 @@ if (!code) {
     populateUI(profile, state);
 
     document.getElementById("next").onclick = function() {next(accessToken)};
+    document.getElementById("play").onclick = function() {play(accessToken)};
 
     console.log(profile);
     console.log(state);
@@ -97,6 +98,20 @@ async function next(token) {
     const result = await fetch("https://api.spotify.com/v1/me/player/next", {
         method: "POST", headers: { Authorization: `Bearer ${token}` }
     })
+
+    console.log(result);
+}
+
+async function play(token){
+    const result = await fetch("https://api.spotify.com/v1/me/player/play", {
+        method: "PUT", headers: { Authorization: `Bearer ${token}` },
+        headers: { 
+            Authorization: `Bearer ${token}`,
+            'Content-Type': `application/json`
+        },
+        data: {"position_ms" : 0}
+
+    });
 
     console.log(result);
 }
