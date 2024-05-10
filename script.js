@@ -9,7 +9,7 @@ if (!code) {
     console.log("Redirect 1")
 } else {
     if(!code1){
-        localStorage.setItem("code", code);
+        sessionStorage.setItem("code", code);
         console.log("Redirect 2");
         redirectToAuthCodeFlow(clientId);
     } else {
