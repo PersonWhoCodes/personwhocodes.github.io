@@ -1,7 +1,7 @@
 const clientId = "45818a98ef3049c091f00a77ad4cf5ee"; // Replace with your client ID
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
-const code1 = localStorage.getItem("code");
+const code1 = sessionStorage.getItem("code");
 let isPaused = false;
 
 if (!code) {
