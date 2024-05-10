@@ -1,21 +1,29 @@
 const clientId = "45818a98ef3049c091f00a77ad4cf5ee"; // Replace with your client ID
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
-let isPaused = true;
+const code1 = localStorage.getItem("code");
+let isPaused = false;
 
 if (!code) {
     redirectToAuthCodeFlow(clientId);
 } else {
+    if(!code1){
+        localStorage.setItem("code", code);
+        redirectToAuthCodeFlow(clientId);
+    } else {
     const accessToken = await getAccessToken(clientId, code);
-    const profile = await fetchProfile(accessToken);
-    const state = await fetchState(accessToken);
-    populateUI(profile, state);
 
     document.getElementById("next").onclick = function() {next(accessToken)};
     document.getElementById("play").onclick = function() {togglePlay(accessToken)};
 
+    const profile = await fetchProfile(accessToken);
+    const state = await fetchState(accessToken);
+
+    populateUI(profile, state);
+
     console.log(profile);
     console.log(state);
+    }
 }
 
 export async function redirectToAuthCodeFlow(clientId) {
@@ -103,12 +111,19 @@ async function next(token) {
     console.log(result);
 }
 
+async function togglePlay(token){
+    if(isPaused){
+        play(token);
+    } else {
+        pause(token);
+    }
+}
 async function play(token){
     const result = await fetch("https://api.spotify.com/v1/me/player/play", {
-        method: "PUT",
+        method: "PUT", headers: { Authorization: `Bearer ${token}` },
         headers: { 
             Authorization: `Bearer ${token}`,
-            'Content-Type': "application/json"
+            'Content-Type': `application/json`
         },
         data: {"position_ms" : 0}
 
