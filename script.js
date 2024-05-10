@@ -13,6 +13,7 @@ if (!code) {
         console.log("Redirect 2");
         redirectToAuthCodeFlow(clientId);
     } else {
+    console.log("what);
     const accessToken = await getAccessToken(clientId, code1);
 
     document.getElementById("next").onclick = function() {next(accessToken)};
