@@ -114,6 +114,8 @@ async function play(token){
 
     });
 
+    isPaused = false;
+
     console.log(result);
 }
 
@@ -121,6 +123,8 @@ async function pause(token){
     const result = await fetch("https://api.spotify.com/v1/me/player/pause", {
         method: "PUT", headers: { Authorization: `Bearer ${token}` }
     })
+
+    isPaused = true;
 
     console.log(result);
 }
