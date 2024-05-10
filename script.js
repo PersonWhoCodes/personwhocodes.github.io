@@ -2,7 +2,6 @@ const clientId = "45818a98ef3049c091f00a77ad4cf5ee"; // Replace with your client
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 const code1 = sessionStorage.getItem("code");
-const accessToken = await getAccessToken(clientId, code1);
 let isPaused = false;
 
 if (!code) {
@@ -14,7 +13,10 @@ if (!code) {
         console.log("Redirect 2");
         redirectToAuthCodeFlow(clientId);
     } else {
-    console.log("what");
+    console.log(code);
+    console.log(code1);
+
+    const accessToken = await getAccessToken(clientId, code);
 
     document.getElementById("next").onclick = function() {next(accessToken)};
     document.getElementById("play").onclick = function() {togglePlay(accessToken)};
