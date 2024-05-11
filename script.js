@@ -8,16 +8,17 @@ if (!code) {
     redirectToAuthCodeFlow(clientId);
     console.log("Redirect 1")
 } else {
-
-    const accessToken = await getAccessToken(clientId, code1);
     
     if(!code1){
-        sessionStorage.setItem("code", code);
+        const accessToken = await getAccessToken(clientId, code);
+        sessionStorage.setItem("token", accesstoken);
         console.log("Redirect 2");
         redirectToAuthCodeFlow(clientId);
     } else {
     console.log(code);
     console.log(code1);
+
+    const accesstoken = sessionStorage.getItem("token");    
 
     document.getElementById("next").onclick = function() {next(accessToken)};
     document.getElementById("play").onclick = function() {togglePlay(accessToken)};
