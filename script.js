@@ -8,6 +8,9 @@ if (!code) {
     redirectToAuthCodeFlow(clientId);
     console.log("Redirect 1")
 } else {
+
+    const accessToken = await getAccessToken(clientId, code1);
+    
     if(!code1){
         sessionStorage.setItem("code", code);
         console.log("Redirect 2");
@@ -15,8 +18,6 @@ if (!code) {
     } else {
     console.log(code);
     console.log(code1);
-
-    const accessToken = await getAccessToken(clientId, code1);
 
     document.getElementById("next").onclick = function() {next(accessToken)};
     document.getElementById("play").onclick = function() {togglePlay(accessToken)};
