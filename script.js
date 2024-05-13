@@ -33,12 +33,12 @@ if (!code) {
     console.log(profile);
     console.log(state);
 
-    let int = setInterval(goo(state), 1000);
+    let int = setInterval(goo(state, accessToken1), 1000);
     }
 }
 
-async function goo(state){
-        let newState = await fetchState(accessToken1);
+async function goo(state, token){
+        let newState = await fetchState(token);
         console.log(newState.item);
         if(newState.item != state.item){
             state.item = newState.item;
