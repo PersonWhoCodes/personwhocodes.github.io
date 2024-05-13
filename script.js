@@ -35,8 +35,9 @@ if (!code) {
 
     int = setInterval(goo(state), 1000);
 
-    function goo(state){
-        let newState = fetchState(accessToken1);
+    async function goo(state){
+        let newState = await fetchState(accessToken1);
+        console.log(newState.item.name);
         if(newState.item.name != state.item.name){
             state.item.name = newState.item.name;
             document.getElementById("help").innerText = state.item.name;
