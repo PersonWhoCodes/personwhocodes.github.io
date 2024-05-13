@@ -19,7 +19,7 @@ if (!code) {
     console.log(code);
     console.log(code1);
 
-    const accesstoken = sessionStorage.getItem("token");    
+    const accessToken = sessionStorage.getItem("token");    
 
     document.getElementById("next").onclick = function() {next(accessToken)};
     document.getElementById("play").onclick = function() {togglePlay(accessToken)};
