@@ -19,20 +19,33 @@ if (!code) {
     console.log(code);
     console.log(code1);
 
-    const accessToken = sessionStorage.getItem("token");    
+    const accessToken = sessionStorage.getItem("token"); 
+    const accessToken1 = await getAccessToken(code);   
 
-    document.getElementById("next").onclick = function() {next(accessToken)};
-    document.getElementById("play").onclick = function() {togglePlay(accessToken)};
+    document.getElementById("next").onclick = function() {next(accessToken1)};
+    document.getElementById("play").onclick = function() {togglePlay(accessToken1)};
 
-    const profile = await fetchProfile(accessToken);
-    const state = await fetchState(accessToken);
+    const profile = await fetchProfile(accessToken1);
+    let state = await fetchState(accessToken1);
 
     populateUI(profile, state);
 
     console.log(profile);
     console.log(state);
+
+    int = setInterval(goo(state), 1000);
+
+    function goo(state){
+        let newState = fetchState(accessToken1);
+        if(newState.item.name != state.item.name){
+            state.item.name = newState.item.name;
+            document.getElementById("help").innerText = state.item.name;
+        }
+    }
     }
 }
+
+
 
 export async function redirectToAuthCodeFlow(clientId) {
     const verifier = generateCodeVerifier(128);
