@@ -45,7 +45,7 @@ async function goo(state){
             document.getElementById("help").innerText = state.item.name;
         }
 
-
+}
 
 export async function redirectToAuthCodeFlow(clientId) {
     const verifier = generateCodeVerifier(128);
