@@ -38,11 +38,10 @@ if (!code) {
 }
 
 async function goo(state, token){
-        let newState = await fetchState(token);
-        console.log(newState.item);
-        if(newState.item != state.item){
-            state.item = newState.item;
-            document.getElementById("help").innerText = state.item.name;
+        const result = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
+    });
+        console.log(result.json());
         }
 
 }
