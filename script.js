@@ -44,8 +44,6 @@ async function goo(state, token){
         console.log(result.json());
         }
 
-}
-
 export async function redirectToAuthCodeFlow(clientId) {
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
