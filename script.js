@@ -34,17 +34,17 @@ if (!code) {
     console.log(state);
 
     let int = setInterval(goo(state), 1000);
+    }
+    }
+}
 
-    function goo(state){
-        let newState = fetchState(accessToken1);
+async function goo(state){
+        let newState = await fetchState(accessToken1);
         console.log(newState.item);
         if(newState.item != state.item){
             state.item = newState.item;
             document.getElementById("help").innerText = state.item.name;
         }
-    }
-    }
-}
 
 
 
