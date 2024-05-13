@@ -20,7 +20,7 @@ if (!code) {
     console.log(code1);
 
     const accessToken = sessionStorage.getItem("token"); 
-    const accessToken1 = await getAccessToken(code);   
+    const accessToken1 = await getAccessToken(clientId, code);   
 
     document.getElementById("next").onclick = function() {next(accessToken1)};
     document.getElementById("play").onclick = function() {togglePlay(accessToken1)};
