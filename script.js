@@ -41,7 +41,7 @@ async function goo(state, token){
         const result = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
-        console.log(result.json());
+        console.log(await result.json());
         }
 
 export async function redirectToAuthCodeFlow(clientId) {
