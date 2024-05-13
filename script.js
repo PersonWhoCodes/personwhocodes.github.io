@@ -35,7 +35,6 @@ if (!code) {
 
     let int = setInterval(goo(state), 1000);
     }
-    }
 }
 
 async function goo(state){
