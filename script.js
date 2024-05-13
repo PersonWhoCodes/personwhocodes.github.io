@@ -37,9 +37,9 @@ if (!code) {
 
     function goo(state){
         let newState = fetchState(accessToken1);
-        console.log(newState.item.name);
-        if(newState.item.name != state.item.name){
-            state.item.name = newState.item.name;
+        console.log(newState.item);
+        if(newState.item != state.item){
+            state.item = newState.item;
             document.getElementById("help").innerText = state.item.name;
         }
     }
