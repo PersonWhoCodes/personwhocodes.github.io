@@ -11,7 +11,8 @@ if (!code) {
     
     if(!code1){
         const accessToken = await getAccessToken(clientId, code);
-        sessionStorage.setItem("token", accesstoken);
+        sessionStorage.setItem("token", accessToken);
+        sessionStorage.setItem("code", code);
         console.log("Redirect 2");
         redirectToAuthCodeFlow(clientId);
     } else {
