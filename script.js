@@ -33,15 +33,15 @@ if (!code) {
     console.log(profile);
     console.log(state);
 
-    goo(state, accessToken1);
+    goo(profile, state, accessToken1);
     }
 }
 
-async function goo(state, token){
+async function goo(profile, state, token){
         const newState = fetchState(token);
     if(newState.item != state.item){
         state.item = newState.item;
-        document.getElementById("help").innerText = newState.item.name
+        populateUI(profile, state);
     }
 
     let tim = setTimeout(goo(state, token), 2000);
