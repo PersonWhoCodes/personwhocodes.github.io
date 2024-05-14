@@ -38,10 +38,10 @@ if (!code) {
 }
 
 async function goo(profile, state, token){
-        const newState = fetchState(token);
+        const newState = await fetchState(token);
     if(newState.item != state.item){
-        state.item = newState.item;
-        populateUI(profile, state);
+        state = newState;
+        populateUI(profile, newState);
     }
 
     let tim = setTimeout(goo(state, token), 2000);
