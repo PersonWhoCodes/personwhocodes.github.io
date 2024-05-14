@@ -33,7 +33,7 @@ if (!code) {
     console.log(profile);
     console.log(state);
 
-    let int = setInterval(goo(state, accessToken1), 1000);
+    goo(state, accessToken1);
     }
 }
 
@@ -42,6 +42,8 @@ async function goo(state, token){
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
         console.log(await result.json());
+
+    let tim = setTimeout(goo(state, token), 1000);
         }
 
 export async function redirectToAuthCodeFlow(clientId) {
