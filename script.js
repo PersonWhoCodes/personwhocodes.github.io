@@ -41,10 +41,10 @@ async function goo(profile, state, token){
         const newState = await fetchState(token);
     console.log(newState);
     console.log(state);
-    }
-
     let tim = setTimeout(goo(state, token), 2000);
-        }
+
+}
+
 
 export async function redirectToAuthCodeFlow(clientId) {
     const verifier = generateCodeVerifier(128);
