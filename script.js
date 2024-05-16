@@ -25,6 +25,7 @@ if (!code) {
 
     document.getElementById("next").onclick = function() {next(accessToken1)};
     document.getElementById("play").onclick = function() {togglePlay(accessToken1)};
+    document.getElementById("ga").onclick = function() {setStateCupcake(accessToken1)};
 
     const profile = await fetchProfile(accessToken1);
     let state = await fetchState(accessToken1);
@@ -129,17 +130,37 @@ async function fetchState(token){
 }
 
 async function setState(newState, token){
+    const data = {
+        "uris": [`spotify:track:${newState.item.id}`]
+    }
+
     const result = await fetch("https://api.spotify.com/v1/me/player/play", {
         method: "PUT",
         headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json"
         },
-        data:{
-            "uris": [`spotify:track:${newState.item.id}`],
-            "position_ms": newState.progress_ms
-        }
+        body: JSON.stringify(data)
     });
+
+    return await result.json();
+}
+
+async function setStateCupcake(token){
+    const data = {
+        "uris": ["spotify:track:35mBYyB61qTcGGj7MXIRM1"]
+    }
+
+    const result = await fetch("https://api.spotify.com/v1/me/player/play", {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return await result.json();
 }
 
 
