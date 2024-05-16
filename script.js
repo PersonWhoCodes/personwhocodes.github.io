@@ -46,7 +46,7 @@ async function goo(state, token1, token2){
     if(newState.item != state.item){
         state = newState;
         document.getElementById("help").innerText = state.item.name;
-        setState(state, token2);
+        const beesh = await setState(state, token2);
     }
     let tim = setTimeout(goo(state, token1, token2), 5000);
 }
