@@ -33,16 +33,15 @@ if (!code) {
     console.log(profile);
     console.log(state);
 
-    goo(profile, state, accessToken1);
+    goo(state, accessToken1);
     }
 }
 
-async function goo(profile, state, token){
+async function goo(state, token){
         const newState = await fetchState(token);
     console.log(newState);
     console.log(state);
     let tim = setTimeout(goo(state, token), 2000);
-
 }
 
 
