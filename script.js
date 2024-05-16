@@ -153,8 +153,9 @@ async function next(token) {
 
 async function play(token){
 
-    const params = new URLSearchParams();
-    params.append("position_ms", 10000);
+    data = {
+        "position_ms":10000
+    };
 
     const result = await fetch("https://api.spotify.com/v1/me/player/play", {
         method: "PUT", headers: { Authorization: `Bearer ${token}` },
@@ -162,7 +163,7 @@ async function play(token){
             Authorization: `Bearer ${token}`,
             'Content-Type': `application/json`
         },
-        body: params
+        body: JSON.stringify(data)
     });
 
     isPaused = false;
