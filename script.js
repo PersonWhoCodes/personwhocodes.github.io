@@ -1,4 +1,4 @@
-onst clientId = "45818a98ef3049c091f00a77ad4cf5ee"; // Replace with your client ID
+const clientId = "45818a98ef3049c091f00a77ad4cf5ee"; // Replace with your client ID
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 const code1 = sessionStorage.getItem("code");
@@ -16,6 +16,7 @@ if (!code) {
         console.log("Redirect 2");
         redirectToAuthCodeFlow(clientId);
     } else {
+    console.log('sex');
     console.log(code);
     console.log(code1);
 
