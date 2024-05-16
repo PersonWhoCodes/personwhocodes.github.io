@@ -48,7 +48,7 @@ async function goo(state, token1, token2){
         document.getElementById("help").innerText = state.item.name;
         setState(state, token2);
     }
-    let tim = setTimeout(goo(state, token1, token2), 2000);
+    let tim = setTimeout(goo(state, token1, token2), 5000);
 }
 
 
