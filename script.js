@@ -1,4 +1,4 @@
-const clientId = "45818a98ef3049c091f00a77ad4cf5ee"; // Replace with your client ID
+onst clientId = "45818a98ef3049c091f00a77ad4cf5ee"; // Replace with your client ID
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 const code1 = sessionStorage.getItem("code");
@@ -38,12 +38,16 @@ if (!code) {
 }
 
 async function goo(state, token){
+    try{
         const newState = await fetchState(token);
+    console.log(newState);
+    console.log(state);
 
     if(newState.item != state.item){
         state = newState;
         document.getElementById("help").innerText = state.item.name;
     }
+} catch(err){}
     let tim = setTimeout(goo(state, token), 2000);
 }
 
@@ -125,6 +129,21 @@ async function fetchState(token){
     }
 }
 
+async function setState(newState, token){
+    const result = await fetch("https://api.spotify.com/v1/me/player/play", {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        data:{
+            "uris": [`spotify:track:${newState.item.id}`],
+            "position_ms": newState.progress_ms
+        }
+    });
+}
+
+
 async function next(token) {
     const result = await fetch("https://api.spotify.com/v1/me/player/next", {
         method: "POST", headers: { Authorization: `Bearer ${token}` }
@@ -140,8 +159,7 @@ async function play(token){
             Authorization: `Bearer ${token}`,
             'Content-Type': `application/json`
         },
-        data: {"position_ms" : 10000}
-
+        body: new URLSearchParams({"position_ms" : 10000})
     });
 
     isPaused = false;
@@ -190,5 +208,6 @@ function populateUI(profile, state) {
         isPaused = true;
     }
 }
+
 
 
