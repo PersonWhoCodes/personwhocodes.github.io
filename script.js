@@ -41,8 +41,6 @@ if (!code) {
 async function goo(state, token){
     try{
         const newState = await fetchState(token);
-    console.log(newState);
-    console.log(state);
 
     if(newState.item != state.item){
         state = newState;
