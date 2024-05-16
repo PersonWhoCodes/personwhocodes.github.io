@@ -142,7 +142,7 @@ async function play(token){
             Authorization: `Bearer ${token}`,
             'Content-Type': `application/json`
         },
-        data: {"position_ms" : 0}
+        data: {"position_ms" : 10000}
 
     });
 
