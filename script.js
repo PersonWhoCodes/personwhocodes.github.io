@@ -31,24 +31,24 @@ if (!code) {
     let state = await fetchState(accessToken1);
 
     populateUI(profile, state);
+    setState(state, accessToken);
 
     console.log(profile);
     console.log(state);
 
-    goo(state, accessToken1);
+    goo(state, accessToken1, accessToken);
     }
 }
 
-async function goo(state, token){
-    try{
-        const newState = await fetchState(token);
+async function goo(state, token1, token2){
+        const newState = await fetchState(token1);
 
     if(newState.item != state.item){
         state = newState;
         document.getElementById("help").innerText = state.item.name;
+        setState(state, token2);
     }
-} catch(err){}
-    let tim = setTimeout(goo(state, token), 2000);
+    let tim = setTimeout(goo(state, token1, token2), 2000);
 }
 
 
@@ -132,23 +132,6 @@ async function fetchState(token){
 async function setState(newState, token){
     const data = {
         "uris": [`spotify:track:${newState.item.id}`]
-    }
-
-    const result = await fetch("https://api.spotify.com/v1/me/player/play", {
-        method: "PUT",
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-
-    return await result.json();
-}
-
-async function setStateCupcake(token){
-    const data = {
-        "uris": ["spotify:track:35mBYyB61qTcGGj7MXIRM1"]
     }
 
     const result = await fetch("https://api.spotify.com/v1/me/player/play", {
