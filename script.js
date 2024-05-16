@@ -153,7 +153,7 @@ async function next(token) {
 
 async function play(token){
 
-    data = {
+    const data = {
         "position_ms":10000
     };
 
