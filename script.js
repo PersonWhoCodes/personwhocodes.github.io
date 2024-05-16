@@ -41,6 +41,11 @@ async function goo(state, token){
         const newState = await fetchState(token);
     console.log(newState);
     console.log(state);
+
+    if(newState.item != state.item){
+        state.item = newState.item
+        document.getElementById("help").innerText = state.item.name;
+    }
     let tim = setTimeout(goo(state, token), 2000);
 }
 
