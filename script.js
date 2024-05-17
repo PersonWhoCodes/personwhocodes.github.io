@@ -43,7 +43,7 @@ if (!code) {
 async function goo(state, token1, token2){
         const newState = await fetchState(token1);
 
-    if(newState.item != state.item){
+    if(newState.item.id != state.item.id){
         state = newState;
         document.getElementById("help").innerText = state.item.name;
         await setState(state, token2);
