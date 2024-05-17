@@ -46,7 +46,7 @@ async function goo(state, token1, token2){
     if(newState.item != state.item){
         state = newState;
         document.getElementById("help").innerText = state.item.name;
-        const beesh = await setState(state, token2);
+        await setState(state, token2);
     }
     let tim = setTimeout(goo(state, token1, token2), 10000);
 }
@@ -143,7 +143,6 @@ async function setState(newState, token){
         body: JSON.stringify(data)
     });
 
-    return await result.json();
 }
 
 
